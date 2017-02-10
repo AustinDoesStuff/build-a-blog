@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>The Most Recent Crap</h2>
+    {% for blog in BlogPost %}
+    <p>{{blog.title}}</p>
+    {% endfor %}
+{% endblock content %}

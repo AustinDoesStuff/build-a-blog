@@ -1,0 +1,7 @@
+{% block content %}
+    {% for blog in BlogPost %}
+        <p>{{blog.title}}</p>
+        <p>{{blog.body}}</p>
+        <br>
+    {% endfor %}
+{% endblock content%}
