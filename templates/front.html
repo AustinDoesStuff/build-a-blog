@@ -3,6 +3,6 @@
 {% block content %}
 <h2>The Most Recent Crap</h2>
     {% for blog in BlogPost %}
-    <p>{{blog.title}}</p>
+    <p><a href="/blogs/{{blog.key().id()}}">{{blog.title}}</a></p>
     {% endfor %}
 {% endblock content %}

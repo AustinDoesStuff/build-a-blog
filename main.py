@@ -50,8 +50,8 @@ class Frontpage(Helper):
 
 class Blogs(Helper):
     def get(self):
-    #Add all the blogs
-        self.render('blogs.html')
+        blogs = getBlogPosts('')
+        self.render('blogs.html', BlogPost = blogs)
 
 class AddBlog(Helper):
     def get(self):
@@ -71,12 +71,18 @@ class AddBlog(Helper):
             self.render('blogpost.html',body=body, title=title, error = 'Try putting more words in places')
 
 class BlogDetail(Helper):
-    def get(self):
-        pass
+    def get(self, blogId):
+        blog = BlogPost.get_by_id(int(blogId))
+        if not blog:
+            self.renderError(404)
+        else:
+            self.render('newpost.html', blog = blog)
+
+        # self.render('newpost.html')
 
 app = webapp2.WSGIApplication([
     ('/', Frontpage),
-    ('/blog', Blogs),
+    ('/blogs', Blogs),
     ('/add', AddBlog),
-    webapp2.Route('/blog/<blogId:\d+>', BlogDetail)
+    webapp2.Route(r'/blogs/<blogId:\d+>', BlogDetail)
 ], debug=True)
